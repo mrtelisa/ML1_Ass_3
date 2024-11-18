@@ -1,18 +1,32 @@
 import matplotlib.pyplot as plt
+import numpy as np
+
 
 def plot_hist(matr, cl, k):
 
-    # Dati
-    labels = ['True Positive', 'False Positive', 'False Negative', 'True Negative']  # Etichette
-    values = [matr[0], matr[1], matr[2], matr[3]]  # Valori da plottare
+    num_histograms = len(matr)
 
-    # Creazione dell'istogramma
-    plt.bar(labels, values)
+    # Creating the subplot gird
+    rows = int(np.ceil(np.sqrt(num_histograms)))  
+    cols = int(np.ceil(num_histograms / rows))  
 
-    # Personalizzazione del grafico
-    plt.title(f"Confusion matrix for class {cl} using a k equal to {k}")  # Titolo
-    plt.xlabel('Values') 
-    plt.ylabel('Cardinality') 
+    # Creating the subplots
+    fig, axes = plt.subplots(rows, cols, figsize=(12, 8))
 
-    # Mostrare il grafico
+    # Appiattire gli assi per gestire la griglia
+    axes = axes.flatten()
+
+    # Plotting each list
+    for i, data in enumerate(matr):
+        labels = ["TP", "FP", "FN", "TN"]  
+        axes[i].bar(labels, data, color=np.random.rand(3,)) 
+        axes[i].set_title(f'Confusion Matrix of class {cl} with k = {k[i]}')
+        axes[i].set_ylabel('cardinality')
+
+    # Hide possible extra-subplot
+    for j in range(num_histograms, len(axes)):
+        fig.delaxes(axes[j])
+
+    # Emproving the layout
+    plt.tight_layout()
     plt.show()

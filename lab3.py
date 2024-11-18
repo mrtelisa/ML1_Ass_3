@@ -5,6 +5,7 @@ from normalization import *
 from knn import *
 from accuracy import *
 from plot_hist import *
+from class_analysis import *
 
 
 # Loading the dataset
@@ -31,29 +32,19 @@ for i in k:
     accuracy = calculate_accuracy(predictions, test_cl)
         #print(accuracy)
 
-k1 = [3, 4, 5, 10]
+k1 = [3, 5, 6, 7, 10, 25, 30, 50]
+cl = [1, 2, 3]
 
-for i in k1:
-    # Control if the class is 1
-        # funct con dentro knn ma anche classe
-    pred1 = knn_class(tr_feat, tr_cl, test_feat, i, 1)
-    tp1, fp1, fn1, tn1 = accuracy_class(pred1, test_cl, 1)
-    conf_matr1 = [tp1, fp1, fn1, tn1]
-        #plot_hist(tp1, fp1, fn1, tn1, 1, i)
-    
-    # Control if the class is 2
-    pred2 = knn_class(tr_feat, tr_cl, test_feat, i, 2)
-    tp2, fp2, fn2, tn2 = accuracy_class(pred2, test_cl, 2)
-    conf_matr2 = [tp2, fp2, fn2, tn2]
-        #plot_hist(tp2, fp2, fn2, tn2, 2, i)
-    
-    # Control if the class is 3
-    pred3 = knn_class(tr_feat, tr_cl, test_feat, i, 3)
-    tp3, fp3, fn3, tn3 = accuracy_class(pred3, test_cl, 3)
-    conf_matr3 = [tp3, fp3, fn3, tn3]
-    
-    plot_hist(conf_matr3, 3, i)
+matr1 = class_analysis(tr_feat, tr_cl, test_feat, test_cl, k1, cl[0])
+matr2 = class_analysis(tr_feat, tr_cl, test_feat, test_cl, k1, cl[1])
+matr3 = class_analysis(tr_feat, tr_cl, test_feat, test_cl, k1, cl[2])
 
-        #print(pred3)
+print("\nMatr1:\n", matr1, "\nMatr2:\n", matr2, "\nMatr3:\n", matr3)
+
+plot_hist(matr1, cl[0], k1)
+plot_hist(matr2, cl[1], k1)
+plot_hist(matr3, cl[2], k1)
+    
+
 
 
