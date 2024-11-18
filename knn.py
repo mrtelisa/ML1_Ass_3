@@ -43,3 +43,18 @@ def knn(tr_feat, tr_cl, test_feat, k):
     
     return pred
 
+
+def knn_class(tr_feat, tr_cl, test_feat, k, cl):
+
+    pred = knn(tr_feat, tr_cl, test_feat, k)
+    bo = []
+    count = 0
+    for i in range(len(pred)):
+        if(pred[i]==cl):
+            bo.append(1)
+            count += 1
+        else:
+            bo.append(0)
+    #print("\nThe prediction has computed", count, "elemements belonging to the class", cl, "using a k equal to", k)
+
+    return bo
