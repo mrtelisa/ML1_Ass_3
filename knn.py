@@ -1,4 +1,5 @@
 import numpy as np
+from accuracy import *
 
 def k_sort_array(arr, k):
     indexed_arr = list(enumerate(arr))
@@ -8,11 +9,9 @@ def k_sort_array(arr, k):
     return ind
 
 
-def knn(tr_feat, tr_cl, test_feat, k):
-        #print(len(tr_feat), len(test_feat))
-
+def knn(tr_feat, tr_cl, test_feat, k, test_cl=None):
     if tr_feat is None or tr_cl is None or test_feat is None or k is None:
-        raise ValueError("Insufficient number of input! 4 arguments are required")
+        raise ValueError("Insufficient number of input! 4 arguments are required.")
 
     if len(tr_feat[1]) != len(test_feat[1]) and len(tr_feat[1]) != (len(test_feat[1]) + 1):
         raise ValueError("Il numero di colonne di train_set deve essere uguale al numero di colonne di test_set.")
@@ -20,8 +19,6 @@ def knn(tr_feat, tr_cl, test_feat, k):
     if k <= 0 or k > len(tr_cl):
         raise ValueError("Vector k containing incomputable values!")
 
-        #print(len(tr_feat))
-    
     pred = []
 
     # For each point in the test set, compute the distance of all the points in the training
@@ -29,22 +26,20 @@ def knn(tr_feat, tr_cl, test_feat, k):
         k_labels = []
         norm = []
         for j in range(len(tr_feat)):
-                #print(type(test_feat), "\n", type(tr_feat))
-                #print(type(test_feat[i]), "\n", type(tr_feat[j]))
             val = np.linalg.norm(np.array(test_feat[i]) - np.array(tr_feat[j]))
             norm.append(float(val))
-            #print(len(norm))
 
-        # Order the distances and takes the lable of k nearest points
-        k_neighbors = k_sort_array(norm, k)
-
+        # Order the distances and takes the label of k nearest points
+        k_neighbors = np.argsort(norm)[:k]  # Using numpy.argsort to sort indices
         for j in k_neighbors:
             k_labels.append(tr_cl[j])
-            #print(k_labels)
-        
+
         # Counting the cardinality of each class and adding in "pred" the mode.
         pred_label = np.bincount(k_labels).argmax()
         pred.append(int(pred_label))
-        #print(pred)
+
+    if test_cl is not None:
+        accuracy = calculate_accuracy(pred, test_cl)
+        return pred, accuracy
 
     return pred

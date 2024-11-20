@@ -28,10 +28,9 @@ tr_cl, tr_feat, test_cl, test_feat = split_matrix_random(cl, norm_feat)
 k = [1, 2, 3, 4, 5, 10, 15, 20, 30, 40, 50]
 
 for i in k:
-    predictions = knn(tr_feat, tr_cl, test_feat, i)
-        #print(predictions)
-    accuracy = calculate_accuracy(predictions, test_cl)
+    predictions, accuracy = knn(tr_feat, tr_cl, test_feat, i, test_cl)
         #print(accuracy)
+        #print(predictions)
 
 k1 = [3, 5, 6, 7, 10, 30]
 cl = [1, 2, 3]
@@ -48,7 +47,7 @@ matr1 = class_analysis(tr_feat, binary_tr[0], test_feat, binary_test[0], k1)
 matr2 = class_analysis(tr_feat, binary_tr[1], test_feat, binary_test[1], k1)
 matr3 = class_analysis(tr_feat, binary_tr[2], test_feat, binary_test[2], k1)
 
-print("\nMatr1:\n", matr1, "\nMatr2:\n", matr2, "\nMatr3:\n", matr3, "\n\n")
+#print("\nMatr1:\n", matr1, "\nMatr2:\n", matr2, "\nMatr3:\n", matr3, "\n\n")
 
 # Computing the values of the statistic requested
 stat = []
