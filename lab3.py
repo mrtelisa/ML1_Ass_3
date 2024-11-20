@@ -41,7 +41,7 @@ matr1 = class_analysis(tr_feat, tr_cl, test_feat, test_cl, k1, cl[0])
 matr2 = class_analysis(tr_feat, tr_cl, test_feat, test_cl, k1, cl[1])
 matr3 = class_analysis(tr_feat, tr_cl, test_feat, test_cl, k1, cl[2])
 
-print("\nMatr1:\n", matr1, "\nMatr2:\n", matr2, "\nMatr3:\n", matr3)
+print("\nMatr1:\n", matr1, "\nMatr2:\n", matr2, "\nMatr3:\n", matr3, "\n\n")
 
 # Computing the values of the statistic requested
 stat = []
@@ -49,18 +49,20 @@ stat.append(stats(tr_feat, tr_cl, test_feat, test_cl, k1, cl[0]))
 stat.append(stats(tr_feat, tr_cl, test_feat, test_cl, k1, cl[1]))
 stat.append(stats(tr_feat, tr_cl, test_feat, test_cl, k1, cl[2]))
 
-for i in range(len(stat)):
-    print(f"sensitivity_{i+1} =", stat[i][0], f"specifity_{i+1} =", stat[i][1], f"precision_{i+1} =", stat[i][2], f"f1_score_{i+1} =", stat[i][3])
+plot_stats(stat)
 
+"""for i in range(len(stat)):
+    print(f"Class {i+1}:\n sensitivity_{i+1} = {(stat[i][0]):.2f}, specifity_{i+1} = {(stat[i][1]):.2f}, precision_{i+1} = {(stat[i][2]):.2f}, f1_score_{i+1} = {(stat[i][3]):.2f}\n")
+"""
 # Plotting the histograms for each class for every k
 """plot_hist(matr1, cl[0], k1)
 plot_hist(matr2, cl[1], k1)
 plot_hist(matr3, cl[2], k1)"""
 
-# Supponendo che matr1, matr2, matr3 siano le matrici per le classi 1, 2 e 3
-plot_confusion_matrices_as_tables(matr1, cl[0], k1)
-plot_confusion_matrices_as_tables(matr2, cl[1], k1)
-plot_confusion_matrices_as_tables(matr3, cl[2], k1)
+# Plotting the confusion matrices for each class for every k
+plot_confusion_matr(matr1, cl[0], k1)
+plot_confusion_matr(matr2, cl[1], k1)
+plot_confusion_matr(matr3, cl[2], k1)
     
 
 

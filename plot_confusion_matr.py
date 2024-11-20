@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_confusion_matrices_as_tables(matrices, class_label, k_values):
+def plot_confusion_matr(matrices, class_label, k_values):
   
     num_matrices = len(matrices)
 
