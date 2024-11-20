@@ -13,7 +13,7 @@ def knn(tr_feat, tr_cl, test_feat, k, test_cl=None):
     if tr_feat is None or tr_cl is None or test_feat is None or k is None:
         raise ValueError("Insufficient number of input! 4 arguments are required.")
 
-    if len(tr_feat[1]) != len(test_feat[1]) and len(tr_feat[1]) != (len(test_feat[1]) + 1):
+    if len(tr_feat[0]) != len(test_feat[0]):
         raise ValueError("Il numero di colonne di train_set deve essere uguale al numero di colonne di test_set.")
 
     if k <= 0 or k > len(tr_cl):

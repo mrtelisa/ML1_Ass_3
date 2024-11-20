@@ -26,7 +26,7 @@ def plot_stats(matrix):
 
     matr = [[round(el, 2) for el in riga] for riga in matrix]
 
-    row_labels = ["Class 1", "Class 2", "Class 3"]
+    row_labels = ["Class 0", "Class 1", "Class 2"]
     col_labels = ["Sensitivity", "Specifity", "Precision", "F1_score"]
 
     fig, ax = plt.subplots(figsize=(len(col_labels) * 1.5, len(row_labels) * 0.8))
