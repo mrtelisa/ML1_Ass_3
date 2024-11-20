@@ -48,12 +48,8 @@ stat = []
 stat.append(stats(tr_feat, tr_cl, test_feat, test_cl, k1, cl[0]))
 stat.append(stats(tr_feat, tr_cl, test_feat, test_cl, k1, cl[1]))
 stat.append(stats(tr_feat, tr_cl, test_feat, test_cl, k1, cl[2]))
-
 plot_stats(stat)
 
-"""for i in range(len(stat)):
-    print(f"Class {i+1}:\n sensitivity_{i+1} = {(stat[i][0]):.2f}, specifity_{i+1} = {(stat[i][1]):.2f}, precision_{i+1} = {(stat[i][2]):.2f}, f1_score_{i+1} = {(stat[i][3]):.2f}\n")
-"""
 # Plotting the histograms for each class for every k
 """plot_hist(matr1, cl[0], k1)
 plot_hist(matr2, cl[1], k1)

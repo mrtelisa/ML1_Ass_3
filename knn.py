@@ -11,8 +11,15 @@ def k_sort_array(arr, k):
 
 def knn(tr_feat, tr_cl, test_feat, k):
         #print(len(tr_feat), len(test_feat))
+
+    if tr_feat is None or tr_cl is None or test_feat is None or k is None:
+        raise ValueError("Insufficient number of input! 4 arguments are required")
+
+    if len(tr_feat[1]) != len(test_feat[1]) and len(tr_feat[1]) != (len(test_feat[1]) + 1):
+        raise ValueError("Il numero di colonne di train_set deve essere uguale al numero di colonne di test_set.")
+
     if k <= 0 or k > len(tr_cl):
-        raise ValueError("k deve essere > 0 e <= al numero di dati di training")
+        raise ValueError("Vector k containing incomputable values!")
 
         #print(len(tr_feat))
     
@@ -40,7 +47,7 @@ def knn(tr_feat, tr_cl, test_feat, k):
         pred_label = np.bincount(k_labels).argmax()
         pred.append(int(pred_label))
         #print(pred)
-    
+
     return pred
 
 
