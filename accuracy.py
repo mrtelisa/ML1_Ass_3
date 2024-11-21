@@ -11,6 +11,7 @@ def calculate_accuracy(predictions, test_cl):
 
     return acc
 
+# Calculating the accuracy for each class, obtaining tp, fp, fn, tn
 def accuracy_class(pred, test_cl):
 
     tp, fp, fn, tn = 0, 0, 0, 0

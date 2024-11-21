@@ -3,7 +3,6 @@ import numpy as np
 from split_dataframe import *
 from normalization import *
 from knn import *
-from accuracy import *
 from plot_hist import *
 from class_analysis import *
 from stats import *
@@ -57,12 +56,11 @@ for i in range(len(cl)):
 plot_stats(stat, "Statistics")
 
 # Computing the statistic requested over n iterations of the code
-n = 10
-statistics = average_stats(classes, norm_feat, k1, cl, n)
-print(statistics)
+iterations = 10
+statistics = average_stats(classes, norm_feat, k1, cl, iterations)
 plot_stats(statistics, "Average statistics")
 
 # Plotting the confusion matrices for each class for every k
 for i in range(len(cl)):
-  plot_conf_matr(matr[i], cl[i], k1)
+    plot_conf_matr(matr[i], cl[i], k1)
  

@@ -1,20 +1,16 @@
-import pandas as pd
-import numpy as np
 from split_dataframe import *
-from normalization import *
 from knn import *
-from accuracy import *
 from class_analysis import *
 from stats import *
-from plot_cm import *
 from compute_binary import *
-from check_k import *
 
 def average_stats(classes, feat, k, cl, iter):
+
     statistics = []
     statistics_0 = []
     statistics_1 = []
     statistics_2 = []
+
     for i in range(iter):
         tr_cl, tr_feat, test_cl, test_feat = split_matrix_random(classes, feat)
 

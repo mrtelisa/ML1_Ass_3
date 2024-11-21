@@ -1,6 +1,7 @@
 import random
 import math
 
+# Splitting dataframes
 def split_matrix_random(cl, feat):
 
     # Selecting 4 casual rows

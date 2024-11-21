@@ -1,3 +1,4 @@
+# Checking if the values in the k vector are valid
 def check_k(k, val):
     
     for i in range(len(k)):

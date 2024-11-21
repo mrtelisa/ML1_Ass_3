@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
 
+# All about confusion matrices
 def plot_cm(matrix, ax, k):
 
     conf_matrix = np.array([
@@ -35,7 +36,7 @@ def plot_cm(matrix, ax, k):
         ax.figure.colorbar(cax, ax = ax, fraction = 0.046, pad = 0.04)
 
 
-
+# Plotting confusion matrices
 def plot_conf_matr(matr, cl, k):
     # Create a 3x3 grid of subplots
     

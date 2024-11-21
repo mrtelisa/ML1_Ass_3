@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+# Plotting histograms, just in case
 def plot_hist(matr, cl, k):
 
     num_histograms = len(matr)

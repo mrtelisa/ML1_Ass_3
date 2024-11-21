@@ -1,3 +1,4 @@
+# Computes a binary matrix
 def compute_binary(matr, cl):
     binary = []
 

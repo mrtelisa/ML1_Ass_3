@@ -2,6 +2,7 @@ from knn import *
 from accuracy import *
 import matplotlib.pyplot as plt
 
+# Computing statistics in different cases
 def stats(tr_feat, bin_tr, test_feat, bin_test, k):
 
     for i in k:

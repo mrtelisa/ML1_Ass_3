@@ -1,15 +1,18 @@
 import numpy as np
 from accuracy import *
-
+# Reorder the elements in an array giving as output an index vector
 def k_sort_array(arr, k):
+
     indexed_arr = list(enumerate(arr))
     sorted_indexed_arr = sorted(indexed_arr, key=lambda x: x[1])
     indices = [x[0] for x in sorted_indexed_arr]
     ind = [indices[i] for i in range(k)]
+
     return ind
 
-
+# Knn classifier implementation
 def knn(tr_feat, tr_cl, test_feat, k, test_cl=None):
+
     if tr_feat is None or tr_cl is None or test_feat is None or k is None:
         raise ValueError("Insufficient number of input! 4 arguments are required.")
 
