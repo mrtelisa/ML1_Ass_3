@@ -1,6 +1,5 @@
 from knn import *
 from accuracy import *
-
 import matplotlib.pyplot as plt
 
 def stats(tr_feat, bin_tr, test_feat, bin_test, k):
@@ -20,9 +19,18 @@ def stats(tr_feat, bin_tr, test_feat, bin_test, k):
     
     return stats
 
-import matplotlib.pyplot as plt
+def compute_av_stats(st):
 
-def plot_stats(matrix):
+    sens, spec, prec, f1 = 0, 0, 0, 0
+    for i in range(len(st)):
+        sens += st[i][0]
+        spec += st[i][1]
+        prec += st[i][2]
+        f1 += st[i][3]
+
+    return [sens/len(st), spec/len(st), prec/len(st), f1/len(st)]
+
+def plot_stats(matrix, str):
 
     matr = [[round(el, 2) for el in riga] for riga in matrix]
 
@@ -51,7 +59,7 @@ def plot_stats(matrix):
     tabella.auto_set_font_size(False)
     tabella.set_fontsize(12)
     tabella.auto_set_column_width(col_labels)
-    ax.set_title("Statistics from the analysis", fontsize=14, weight="bold", pad=20)
+    ax.set_title(f"{str} from the analysis", fontsize=14, weight="bold", pad=20)
 
     plt.show()
 

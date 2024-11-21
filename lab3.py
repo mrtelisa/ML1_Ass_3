@@ -11,8 +11,9 @@ from plot_cm import *
 from compute_binary import *
 from check_k import *
 from sklearn.datasets import load_wine
+from av_stat import *
 
-# Loading the dataset
+# Loading the dataset and dividing it between classes and features
 wine = load_wine()
 X, y = wine.data, wine.target
 classes = np.array(y)
@@ -53,9 +54,15 @@ print("\nMatr0:\n", matr[0], "\nMatr1:\n", matr[1], "\nMatr2:\n", matr[2], "\n\n
 stat = []
 for i in range(len(cl)):
     stat.append(stats(tr_feat, binary_tr[i], test_feat, binary_test[i], k1))
-plot_stats(stat)
+plot_stats(stat, "Statistics")
+
+# Computing the statistic requested over n iterations of the code
+n = 10
+statistics = average_stats(classes, norm_feat, k1, cl, n)
+print(statistics)
+plot_stats(statistics, "Average statistics")
 
 # Plotting the confusion matrices for each class for every k
 for i in range(len(cl)):
-   plot_conf_matr(matr[i], cl[i], k1)
+  plot_conf_matr(matr[i], cl[i], k1)
  
