@@ -28,6 +28,7 @@ check_k(k, 3)
 
 for i in k:
     predictions, accuracy = knn(tr_feat, tr_cl, test_feat, i, test_cl)
+    print(f"Accuracy with k = {i}:", accuracy)
 
 ################################################################## TASK 2
 # Creating a list containing the values of the different classes
