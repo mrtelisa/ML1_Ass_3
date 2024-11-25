@@ -73,7 +73,6 @@ def compute_acc_stat(vec):
     return st
 
 
-import matplotlib.pyplot as plt
 
 def plot_table(data, row_labels=None, column_labels=None):
     if row_labels is None:
@@ -81,12 +80,10 @@ def plot_table(data, row_labels=None, column_labels=None):
     if column_labels is None:
         column_labels = ["Average", "Std_dev"]
 
-    # Configurazione della figura
     fig, ax = plt.subplots()
     ax.axis('tight')
     ax.axis('off')
 
-    # Creazione della tabella
     table = plt.table(
         cellText=data, 
         rowLabels=row_labels, 
@@ -94,25 +91,18 @@ def plot_table(data, row_labels=None, column_labels=None):
         loc='center', 
         cellLoc='center'
     )
-
-    # Personalizzazione delle celle
+    
     for (i, j), cell in table.get_celld().items():
-        if i == 0 or j == -1:  # Prima riga o colonna di etichette
+        if i == 0 or j == -1: 
             cell.set_text_props(color="black")
-            cell.set_facecolor("#fffacd")  # Giallo chiaro
+            cell.set_facecolor("#fffacd")  
 
-    # Impostazioni di dimensioni e caratteri
     table.auto_set_font_size(False)
     table.set_fontsize(10)
-
-    # Ridimensiona manualmente la larghezza delle colonne
     for col in range(len(column_labels)):
         table.auto_set_column_width([col])
-
-    # Titolo
     ax.set_title("Average and Standard deviation over all values of k", fontsize=14, weight="bold", pad=20)
 
-    # Mostra la tabella
     plt.show()
 
 
