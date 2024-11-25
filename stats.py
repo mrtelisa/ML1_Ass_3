@@ -64,4 +64,56 @@ def compute_stat_stat(st):
 
     return matr
 
+def compute_acc_stat(vec):
+    st = []
+    st.append(compute_average(vec))
+    stand = np.std(vec)
+    st.append(stand.tolist())
+
+    return st
+
+
+import matplotlib.pyplot as plt
+
+def plot_table(data, row_labels=None, column_labels=None):
+    if row_labels is None:
+        row_labels = [f"Class {i}" for i in range(len(data))]
+    if column_labels is None:
+        column_labels = ["Average", "Std_dev"]
+
+    # Configurazione della figura
+    fig, ax = plt.subplots()
+    ax.axis('tight')
+    ax.axis('off')
+
+    # Creazione della tabella
+    table = plt.table(
+        cellText=data, 
+        rowLabels=row_labels, 
+        colLabels=column_labels, 
+        loc='center', 
+        cellLoc='center'
+    )
+
+    # Personalizzazione delle celle
+    for (i, j), cell in table.get_celld().items():
+        if i == 0 or j == -1:  # Prima riga o colonna di etichette
+            cell.set_text_props(color="black")
+            cell.set_facecolor("#fffacd")  # Giallo chiaro
+
+    # Impostazioni di dimensioni e caratteri
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+
+    # Ridimensiona manualmente la larghezza delle colonne
+    for col in range(len(column_labels)):
+        table.auto_set_column_width([col])
+
+    # Titolo
+    ax.set_title("Average and Standard deviation over all values of k", fontsize=14, weight="bold", pad=20)
+
+    # Mostra la tabella
+    plt.show()
+
+
 

@@ -67,5 +67,10 @@ def compute_mode(st):
 
     return mode
 
+def compute_average(vec):
+    i = 0
+    for j in range(len(vec)):
+        i += vec[j]
+    return i/len(vec)
 
 

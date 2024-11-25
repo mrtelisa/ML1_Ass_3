@@ -46,3 +46,7 @@ def knn(tr_feat, tr_cl, test_feat, k, test_cl=None):
         return pred, accuracy
 
     return pred
+
+def knn_acc(tr_feat, tr_cl, test_feat, k, test_cl):
+    pred, acc = knn(tr_feat, tr_cl, test_feat, k, test_cl)
+    return acc

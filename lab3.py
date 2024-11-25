@@ -26,9 +26,16 @@ tr_cl, tr_feat, test_cl, test_feat = split_matrix_random(classes, norm_feat)
 k = [1, 2, 3, 4, 5, 10, 15, 20, 30, 40, 50]
 check_k(k, 3)
 
+accuracies = []
+columns = []
 for i in k:
     predictions, accuracy = knn(tr_feat, tr_cl, test_feat, i, test_cl)
-    print(f"Accuracy with k = {i}:", accuracy)
+    accuracies.append(accuracy)
+    columns.append(f"k = {i}")
+
+tbl = pd.DataFrame([accuracies], index=["Accuracy"], columns=columns)  
+print("\nAccuracy of knn as k changes:\n\n", tbl, "\n\n")
+
 
 ################################################################## TASK 2
 # Creating a list containing the values of the different classes
@@ -44,17 +51,41 @@ binary_test = compute_binary(test_cl, cl)
 k1 = [1, 2, 3, 6, 7, 10, 30, 49]
 check_k(k1, 2)
 
-# Analyizing each class
+# Analyizing each class and predicting for each element to which class it belongs
 matr = []
 for i in range(len(cl)):
     matr.append(class_analysis(tr_feat, binary_tr[i], test_feat, binary_test[i], k1))
 #print("\nMatr0:\n", matr[0], "\nMatr1:\n", matr[1], "\nMatr2:\n", matr[2], "\n\n")
 
+# Plotting the confusion matrices for each class for every k
+for i in range(len(cl)):
+    plot_conf_matr(matr[i], cl[i], k1)
+
+############################################################################################################################################
 # Computing the statistic requested over n iterations of the code and plotting the results for each class for each k value in k1
 iterations = 10
 average_stats(classes, norm_feat, k1, cl, iterations)
 
-# Plotting the confusion matrices for each class for every k
-for i in range(len(cl)):
-    plot_conf_matr(matr[i], cl[i], k1)
+############################################################################################################################################
+# Calculating the average and the standard deviations for each class as k changes
+acc = []
+acc_stats = []
+
+row_labels = []
+
+for c in cl:
+    row_labels.append(f"Class {c}")
+    acc_cl = []
+    for k in k1:
+        acc_cl.append(knn_acc(tr_feat, binary_tr[c], test_feat, k, binary_test[c]))
+    acc.append(acc_cl)
+    acc_stats.append(compute_acc_stat(acc_cl))
+    
+col_labels = []
+for k in k1:
+    col_labels.append(f"k = {k}")
+
+table = pd.DataFrame(acc, index=row_labels, columns=col_labels)
+print("\n\nValues of accuracies:\n\n", table)
+plot_table(acc_stats)
  
