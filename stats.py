@@ -1,14 +1,37 @@
+from values import *
 from knn import *
 from accuracy import *
 import matplotlib.pyplot as plt
 
+# Calculating the accuracy for each class, obtaining tp, fp, fn, tn
+def accuracy_class(pred, test_cl):
+
+    tp, fp, fn, tn = 0, 0, 0, 0
+
+    for i in range(len(pred)):
+        if(pred[i] == 1):
+            if(test_cl[i] == 1):
+                tp += 1
+            else:
+                fp += 1
+        else:
+            if(test_cl[i] == 1):
+                fn += 1
+            else:
+                tn += 1
+
+    return tp, fp, fn, tn
+
+
+
 # Computing statistics in different cases
 def stats(tr_feat, bin_tr, test_feat, bin_test, k):
 
+    matr = []
     for i in k:
+        stats = []
         pred = knn(tr_feat, bin_tr, test_feat, i)
         tp, fp, fn, tn = accuracy_class(pred, bin_test)
-        stats = []
         sensitivity = tp / (tp + fn)
         stats.append(sensitivity)
         specifity = tn / (tn + fp)
@@ -17,50 +40,28 @@ def stats(tr_feat, bin_tr, test_feat, bin_test, k):
         stats.append(precision)
         f1_score = (2 * precision * sensitivity) / (precision + sensitivity)
         stats.append(f1_score)
+        stats.append(calculate_accuracy(pred, bin_test))
+        matr.append(stats)
     
-    return stats
+        #print(f"matr for k = {i}:\n", matr)
+    return matr[0]
 
-def compute_av_stats(st):
 
-    sens, spec, prec, f1 = 0, 0, 0, 0
-    for i in range(len(st)):
-        sens += st[i][0]
-        spec += st[i][1]
-        prec += st[i][2]
-        f1 += st[i][3]
 
-    return [sens/len(st), spec/len(st), prec/len(st), f1/len(st)]
+def compute_stat_stat(st):
 
-def plot_stats(matrix, str):
+    matr = []
+    matr.append(compute_av_stats(st))
+    matr.append(compute_median(st))
+    matr.append(compute_mode(st))
+    stand = np.std(st, axis=0)
+    perc25 = np.percentile(st, 25, axis=0)
+    perc75 = np.percentile(st, 75, axis=0)
+    
+    matr.append(stand.tolist())
+    matr.append(perc25.tolist())
+    matr.append(perc75.tolist())
 
-    matr = [[round(el, 2) for el in riga] for riga in matrix]
+    return matr
 
-    row_labels = ["Class 0", "Class 1", "Class 2"]
-    col_labels = ["Sensitivity", "Specifity", "Precision", "F1_score"]
-
-    fig, ax = plt.subplots(figsize=(len(col_labels) * 1.5, len(row_labels) * 0.8))
-    ax.axis("tight")
-    ax.axis("off")
-
-    # Creating the table
-    tabella = ax.table(
-        cellText=matr,
-        rowLabels=row_labels,
-        colLabels=col_labels,
-        loc="center",
-        cellLoc="center",
-    )
-
-    # Lables of rows and columns 
-    for (i, j), cell in tabella.get_celld().items():
-        if i == 0 or j == -1:  # Etichette di intestazione o righe
-            cell.set_text_props(color="black")
-            cell.set_facecolor("#fffacd")  # Giallo chiaro
-
-    tabella.auto_set_font_size(False)
-    tabella.set_fontsize(12)
-    tabella.auto_set_column_width(col_labels)
-    ax.set_title(f"{str} from the analysis", fontsize=14, weight="bold", pad=20)
-
-    plt.show()
 

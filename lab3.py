@@ -40,25 +40,18 @@ binary_tr = compute_binary(tr_cl, cl)
 binary_test = compute_binary(test_cl, cl)
 
 # Inizialising k1 + checking on its values
-k1 = [1, 2, 3, 5, 6, 7, 10, 30, 49]
+k1 = [1, 2, 3, 6, 7, 10, 30, 49]
 check_k(k1, 2)
 
 # Analyizing each class
 matr = []
 for i in range(len(cl)):
     matr.append(class_analysis(tr_feat, binary_tr[i], test_feat, binary_test[i], k1))
-print("\nMatr0:\n", matr[0], "\nMatr1:\n", matr[1], "\nMatr2:\n", matr[2], "\n\n")
+#print("\nMatr0:\n", matr[0], "\nMatr1:\n", matr[1], "\nMatr2:\n", matr[2], "\n\n")
 
-# Computing the values of the statistic requested
-stat = []
-for i in range(len(cl)):
-    stat.append(stats(tr_feat, binary_tr[i], test_feat, binary_test[i], k1))
-plot_stats(stat, "Statistics")
-
-# Computing the statistic requested over n iterations of the code
+# Computing the statistic requested over n iterations of the code and plotting the results for each class for each k value in k1
 iterations = 10
-statistics = average_stats(classes, norm_feat, k1, cl, iterations)
-plot_stats(statistics, "Average statistics")
+average_stats(classes, norm_feat, k1, cl, iterations)
 
 # Plotting the confusion matrices for each class for every k
 for i in range(len(cl)):
