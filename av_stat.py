@@ -36,8 +36,6 @@ def average_stats(classes, feat, k_values, cl, iterations):
         plot_statistics(aggregated_stats1[0], 1, k)
         plot_statistics(aggregated_stats2[0], 2, k)
             
-    
-        
 
 
 def plot_statistics(matrix, cl, k):

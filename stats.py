@@ -101,7 +101,7 @@ def plot_table(data, row_labels=None, column_labels=None):
     table.set_fontsize(10)
     for col in range(len(column_labels)):
         table.auto_set_column_width([col])
-    ax.set_title("Average and Standard deviation over all values of k", fontsize=14, weight="bold", pad=20)
+    ax.set_title("Average and Standard deviation of the accurcies over all values of k", fontsize=14, weight="bold", pad=20)
 
     plt.show()
 
