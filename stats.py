@@ -64,7 +64,7 @@ def compute_stat_stat(st):
 
     return matr
 
-def compute_acc_stat(vec):
+def compute_acc_class(vec):
     st = []
     st.append(compute_average(vec))
     stand = np.std(vec)
@@ -72,20 +72,31 @@ def compute_acc_stat(vec):
 
     return st
 
+def compute_acc_k(matr):
+    tran = list(map(list, zip(*matr)))
+    st = []
+    for i in range(len(tran)):
+        a = []
+        a.append(compute_average(tran[i]))
+        a.append(np.std(tran[i]))
+        st.append(a)
+
+    return st
 
 
-def plot_table(data, row_labels=None, column_labels=None):
-    if row_labels is None:
-        row_labels = [f"Class {i}" for i in range(len(data))]
-    if column_labels is None:
-        column_labels = ["Average", "Std_dev"]
+
+def plot_table(data, row_labels, tit=None):
+    row_labels = row_labels
+    column_labels = ["Average", "Std_dev"]
 
     fig, ax = plt.subplots()
     ax.axis('tight')
     ax.axis('off')
 
+    data_rounded = [[round(value, 4) if isinstance(value, (int, float)) else value for value in row] for row in data]
+
     table = plt.table(
-        cellText=data, 
+        cellText=data_rounded, 
         rowLabels=row_labels, 
         colLabels=column_labels, 
         loc='center', 
@@ -101,9 +112,7 @@ def plot_table(data, row_labels=None, column_labels=None):
     table.set_fontsize(10)
     for col in range(len(column_labels)):
         table.auto_set_column_width([col])
-    ax.set_title("Average and Standard deviation of the accurcies over all values of k", fontsize=14, weight="bold", pad=20)
+    ax.set_title(tit, fontsize=14, weight="bold", pad=20)
 
     plt.show()
-
-
 

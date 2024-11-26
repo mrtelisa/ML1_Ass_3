@@ -64,7 +64,7 @@ for i in range(len(cl)):
 ############################################################################################################################################
 # Computing the statistic requested over n iterations of the code and plotting the results for each class for each k value in k1
 iterations = 10
-average_stats(classes, norm_feat, k1, cl, iterations)
+#average_stats(classes, norm_feat, k1, cl, iterations)
 
 ############################################################################################################################################
 # Calculating the average and the standard deviations for each class as k changes
@@ -79,13 +79,18 @@ for c in cl:
     for k in k1:
         acc_cl.append(knn_acc(tr_feat, binary_tr[c], test_feat, k, binary_test[c]))
     acc.append(acc_cl)
-    acc_stats.append(compute_acc_stat(acc_cl))
+    acc_stats.append(compute_acc_class(acc_cl))
     
 col_labels = []
 for k in k1:
     col_labels.append(f"k = {k}")
 
-table = pd.DataFrame(acc, index=row_labels, columns=col_labels)
-print("\n\nValues of accuracies:\n\n", table)
-plot_table(acc_stats)
+table_cl = pd.DataFrame(acc, index=row_labels, columns=col_labels)
+print("\n\nValues of accuracies:\n\n", table_cl)
+
+plot_table(acc_stats, [f"Class {i}" for i in range(len(acc_stats))], "Average and Standard deviation of the accuracy computed on each class over all values of k")
+
+acc_k = compute_acc_k(acc)
+plot_table(acc_k, [f"k = {i}" for i in k1], "Average and Standard deviation of the accuracy computed on each k over all classes")
+
  
