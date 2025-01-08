@@ -64,7 +64,7 @@ def plot_statistics(matrix, cl, k):
 
     tab.auto_set_font_size(False)
     tab.set_fontsize(12)
-    tab.auto_set_column_width(col_labels)
+    tab.auto_set_column_width(len(col_labels))
     ax.set_title(f"Statistics for class {cl} and k={k}", fontsize=14, weight="bold", pad=20)
 
     plt.show()

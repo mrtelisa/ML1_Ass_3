@@ -64,7 +64,7 @@ for i in range(len(cl)):
 ############################################################################################################################################
 # Computing the statistic requested over n iterations of the code and plotting the results for each class for each k value in k1
 iterations = 10
-#average_stats(classes, norm_feat, k1, cl, iterations)
+average_stats(classes, norm_feat, k1, cl, iterations)
 
 ############################################################################################################################################
 # Calculating the average and the standard deviations for each class as k changes
